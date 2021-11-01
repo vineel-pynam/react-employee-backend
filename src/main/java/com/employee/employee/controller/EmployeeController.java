@@ -14,36 +14,36 @@ import java.util.List;
 @CrossOrigin("*")
 public class EmployeeController {
 
-    private EmployeeServiceInterface esi;
+    private EmployeeService employeeService;
 
     @Autowired
     public EmployeeController(EmployeeService employeeService){
-        esi = employeeService;
+        this.employeeService = employeeService;
     }
 
     @GetMapping(path = "/employees")
     public List<Employee> getEmployees(){
-        return esi.getEmployees();
+        return employeeService.getEmployees();
     }
 
     @PostMapping(path = "/add/employee")
     public void postEmployee(@RequestBody Employee employee){
-        esi.postEmployee(employee);
+        employeeService.postEmployee(employee);
     }
 
     @GetMapping(path = "/employees/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id){
-       return esi.getEmployeeById(id);
+       return employeeService.getEmployeeById(id);
     }
 
     @DeleteMapping(path = "/delete/employees/{id}")
     public ResponseEntity<String> deleteEmployeeById(@PathVariable Long id){
-        return esi.deleteEmployeeById(id);
+        return employeeService.deleteEmployeeById(id);
     }
 
     @PutMapping(path = "/update/employees/{id}")
     public void updateEmployee(@PathVariable Long id, @RequestBody Employee employeeDetails){
-        esi.updateEmployee(id, employeeDetails);
+        employeeService.updateEmployee(id, employeeDetails);
     }
 
 }
